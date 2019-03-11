@@ -11,7 +11,7 @@ configure_ara:
 	echo "\ncallback_plugins=$(ARA_CALLBACKS)" >> ansible.cfg
 	echo 'action_plugins=$(ARA_CALLBACKS)' >> ansible.cfg
 
-	ara-manage dropall
+	printf "y\n" | ara-manage dropall
 	ara-manage createall
 
 ara:
