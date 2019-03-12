@@ -2,4 +2,4 @@
 - hosts: integr8-docker-swarm-manager
   gather_facts: True
   roles:
-    - ansible-role-docker-swarm-manager
+    - ansible-role-docker-swarm
