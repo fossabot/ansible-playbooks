@@ -1,5 +1,7 @@
 ---
-- hosts: integr8-docker-swarm-manager
+- hosts: 
+    - integr8-docker-swarm-manager
+    - integr8-docker-swarm-worker
   gather_facts: True
   roles:
     - ansible-role-docker-swarm
