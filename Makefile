@@ -18,6 +18,9 @@ ara_reset:
 ara_server:
 	ara-manage runserver&
 
+ara_html_report:
+	ara generate html html_report
+
 pdf:
 	docker run --rm -v $(CURDIR):/documents/ -e 'ASCIIDOCTOR_PLUGIN=asciidoctor-rouge' -e 'ASCIIDOCTOR_PDF_THEMES_DIR=docs/resources/themes' -e 'ASCIIDOCTOR_PDF_THEME=default' -e 'ASCIIDOCTOR_PDF_FONTS_DIR=docs/resources/fonts' integr8/alpine-asciidoctor-helper pdf docs/index-ptbr.adoc
 
