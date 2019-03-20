@@ -9,8 +9,8 @@ jobs:
       script:
         - docker run --rm -v $TRAVIS_BUILD_DIR:/documents/ -e 'ASCIIDOCTOR_PLUGIN=asciidoctor-rouge' -e 'ASCIIDOCTOR_PDF_THEMES_DIR=docs/resources/themes' -e 'ASCIIDOCTOR_PDF_THEME=default' -e 'ASCIIDOCTOR_PDF_FONTS_DIR=docs/resources/fonts' integr8/alpine-asciidoctor-helper pdf docs/index-ptbr.adoc
         - docker run --rm -v $TRAVIS_BUILD_DIR:/documents/ -e 'ASCIIDOCTOR_PLUGIN=tel-inline-macro' integr8/alpine-asciidoctor-helper html docs/index-ptbr.adoc
-        - mv output/index-ptbr.html output/index.html
-        - mv output/index-ptbr.pdf output/index.pdf
+        - mv $TRAVIS_BUILD_DIR/output/index-ptbr.html $TRAVIS_BUILD_DIR/output/index.html
+        - mv $TRAVIS_BUILD_DIR/output/index-ptbr.pdf $TRAVIS_BUILD_DIR/output/index.pdf
       deploy:
         provider: pages
         target-branch: gh-pages
