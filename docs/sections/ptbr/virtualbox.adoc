@@ -1,0 +1,93 @@
+
+== Criação da stack utilizando VirtualBox
+
+=== Criação da rede específica para a stack
+
+[source, shell]
+--------------------------------------------------------------
+vboxmanage hostonlyif create
+vboxmanage hostonlyif ipconfig vboxnet0 --ip 192.168.58.1
+vboxmanage dhcpserver add --ifname vboxnet0 --ip 192.168.58.1 --netmask 255.255.255.0 --lowerip 192.168.58.100 --upperip 192.168.58.200
+vboxmanage dhcpserver modify --ifname vboxnet0 --enable
+--------------------------------------------------------------
+
+=== Centos
+
+==== Manager Node
+
+===== Clona a imagem
+[source, shell]
+--------------------------------------------------------------
+git@gitlab.com:integr8/development/vdi-images.git && 7z x -so centos-7-1708.tar.7z| tar xf -
+--------------------------------------------------------------
+
+===== Cria a máquina virtual do nó que servirá como Manager
+[source, shell]
+--------------------------------------------------------------
+vboxmanage createvm --name integr8-centos-manager --ostype "Other_64" --register
+vboxmanage modifyvm integr8-centos-manager --memory 2048 --vram 128
+VBoxManage modifyvm integr8-centos-manager --cpuhotplug on
+VBoxManage modifyvm integr8-centos-manager --cpus 2
+--------------------------------------------------------------
+
+===== Anexa a rede criada ao segundo adaptador da máquina
+[source, shell]
+--------------------------------------------------------------
+vboxmanage modifyvm integr8-centos-manager --hostonlyadapter2 vboxnet0
+vboxmanage modifyvm integr8-centos-manager --nic2 hostonly
+--------------------------------------------------------------
+
+===== Cria uma controladora SATA e anexa o VDI clonado
+[source, shell]
+--------------------------------------------------------------
+vboxmanage storagectl integr8-centos-manager --name "SATA Controller" --add sata --controller IntelAHCI
+vboxmanage storageattach integr8-centos-manager --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium centos-7-1708.vdi
+--------------------------------------------------------------
+
+
+===== Tira um snapshot do estado inicial da VM
+[source, shell]
+--------------------------------------------------------------
+vboxmanage snapshot integr8-centos-manager take initial
+--------------------------------------------------------------
+
+==== Worker Node
+
+===== Cria a máquina virtual do nó que servirá como Worker
+[source, shell]
+--------------------------------------------------------------
+vboxmanage createvm --name integr8-centos-worker-01 --ostype "Other_64" --register
+vboxmanage modifyvm integr8-centos-worker-01 --memory 2048 --vram 128
+VBoxManage modifyvm integr8-centos-worker-01 --cpuhotplug on
+VBoxManage modifyvm integr8-centos-worker-01 --cpus 2
+--------------------------------------------------------------
+
+===== Copia o HD da Manager, cria uma controladora SATA e anexa o VDI clonado
+[source, shell]
+--------------------------------------------------------------
+cp centos-7-1708.vdi centos-7-1708-worker-01.vdi
+
+vboxmanage internalcommands sethduuid centos-7-1708-worker-01.vdi
+vboxmanage storagectl integr8-centos-worker-01 --name "SATA Controller" --add sata --controller IntelAHCI
+vboxmanage storageattach integr8-centos-worker-01 --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium centos-7-1708-worker-01.vdi
+--------------------------------------------------------------
+
+===== Anexa a rede criada ao segundo adaptador da máquina
+[source, shell]
+--------------------------------------------------------------
+vboxmanage modifyvm integr8-centos-worker-01 --hostonlyadapter2 vboxnet0
+vboxmanage modifyvm integr8-centos-worker-01 --nic2 hostonly
+--------------------------------------------------------------
+
+===== Tira um snapshot do estado inicial da VM
+[source, shell]
+--------------------------------------------------------------
+vboxmanage snapshot integr8-centos-worker-01 take initial
+--------------------------------------------------------------
+
+===== Inicia as duas VMs
+[source, shell]
+--------------------------------------------------------------
+vboxheadless -s integr8-centos-manager&
+vboxheadless -s integr8-centos-worker-01&
+--------------------------------------------------------------

@@ -1,0 +1,17 @@
+:toc2:
+:toclevels: 2
+:icons: font
+:iconfont-cdn: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css
+:linkattrs:
+:sectanchors:
+:nofooter:
+:sectlink:
+:experimental:
+:source-language: asciidoc
+:includedir: sections
+:doc-version: 1.0
+:author: Integr8
+:full-name: Integr8
+:authorinitials: F.L.N.G.
+:source-highlighter: rouge
+:doctitle: OpenSource DevOps Tools - {author}
