@@ -8,7 +8,7 @@ before_install:
 script:
   - docker run --rm -v $TRAVIS_BUILD_DIR:/documents/ -e 'ASCIIDOCTOR_PLUGIN=asciidoctor-rouge' -e 'ASCIIDOCTOR_PDF_THEMES_DIR=docs/resources/themes' -e 'ASCIIDOCTOR_PDF_THEME=default' -e 'ASCIIDOCTOR_PDF_FONTS_DIR=docs/resources/fonts' integr8/alpine-asciidoctor-helper pdf docs/index-ptbr.adoc
   - docker run --rm -v $TRAVIS_BUILD_DIR:/documents/ -e 'ASCIIDOCTOR_PLUGIN=tel-inline-macro' integr8/alpine-asciidoctor-helper html docs/index-ptbr.adoc
-  - cp output/index-ptbr.html outoutput/index.html
+  - cp output/index-ptbr.html output/index.html
   - mv output/index-ptbr.html output/ptbr/index.html
   - mv output/index-ptbr.pdf output/ptbr/index.pdf
 deploy:
