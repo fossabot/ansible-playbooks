@@ -9,7 +9,7 @@ ara_install:
 
 ara_configure_ansible:
 	echo "\ncallback_plugins=$(ARA_CALLBACKS)" >> ansible.cfg
-	echo 'action_plugins=$(ARA_CALLBACKS)' >> ansible.cfg
+	echo 'action_plugins=$(ARA_ACTIONS)' >> ansible.cfg
 
 ara_reset:
 	printf "y\n" | ara-manage dropall
