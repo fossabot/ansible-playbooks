@@ -4,7 +4,7 @@
     - integr8-docker-swarm-worker
   gather_facts: True
   roles:
-    # - ansible-role-docker-swarm
-    # - ansible-role-traefik
-    # - ansible-role-portainer
+    - ansible-role-docker-swarm
+    - ansible-role-traefik
+    - ansible-role-portainer
     - ansible-role-selenium-hub
