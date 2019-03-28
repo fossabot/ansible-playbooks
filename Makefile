@@ -26,7 +26,6 @@ pdf:
 
 pdf_open:
 	xdg-open output/index-ptbr.pdf
-
 html:
 	docker run --rm -v $(CURDIR):/documents/ -e 'ASCIIDOCTOR_PLUGIN=tel-inline-macro' integr8/alpine-asciidoctor-helper html docs/index-ptbr.adoc
 
