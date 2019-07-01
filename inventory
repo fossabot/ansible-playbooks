@@ -3,8 +3,8 @@ localhost ansible_connection=local
 integr8-centos-manager ansible_host=192.168.58.100 ansible_port=2222 ansible_user=root ansible_password=password
 integr8-centos-worker-01 ansible_host=192.168.58.101 ansible_port=2222 ansible_user=root ansible_password=password
 
-[integr8-docker-swarm-manager]
+[swarm_manager]
 integr8-centos-manager
 
-[integr8-docker-swarm-worker]
+[swarm_worker]
 integr8-centos-worker-01

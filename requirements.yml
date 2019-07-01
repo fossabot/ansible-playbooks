@@ -1,0 +1,11 @@
+- src: integr8.ansible_role_docker_swarm
+  version: development
+
+- src: integr8.ansible_role_traefik
+  version: development
+
+- src: integr8.ansible_role_sonatype_nexus
+  version: development
+
+- src: integr8.ansible_role_sonarqube
+  version: development

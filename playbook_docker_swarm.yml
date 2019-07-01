@@ -1,10 +1,10 @@
 ---
 - hosts: 
-    - integr8-docker-swarm-manager
-    - integr8-docker-swarm-worker
+    - swarm_manager
+    - swarm_worker
   gather_facts: True
   roles:
-    - ansible-role-docker-swarm
-    - ansible-role-traefik
-    - ansible-role-portainer
-    - ansible-role-selenium-hub
+    - integr8.ansible_role_docker_swarm
+    - integr8.ansible_role_traefik
+    - integr8.ansible_role_sonatype_nexus
+    - integr8.ansible_role_sonarqube
