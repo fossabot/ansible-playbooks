@@ -1,3 +1,11 @@
+== Configurando 
+
+=== Hosts
+
+[source, shell]
+--------------------------------------------------------------
+192.168.58.100 traefik.integr8.me sonarqube.integr8.me graylog.integr8.me seleniumhub.integr8.me
+--------------------------------------------------------------
 
 == Criação da stack utilizando VirtualBox
 
